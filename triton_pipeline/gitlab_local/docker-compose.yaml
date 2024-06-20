@@ -12,7 +12,7 @@ services:
       - "80:80"
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://3.36.103.119:10001' # Change this to your GitLab's URL
+        external_url 'http://43.201.97.211:10001' # Change this to your GitLab's URL
         gitlab_rails['initial_root_password'] = 'Blud1234567'
     volumes:
       - ./gitlab/config:/etc/gitlab
