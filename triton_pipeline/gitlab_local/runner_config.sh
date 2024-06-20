@@ -99,10 +99,10 @@ check_container() {
   declare -p containers_list
 
   for container in "${containers_list[@]}"; do
-    if docker inspect --format '{{.State.Running}}' "$container_name" &> /dev/null; then
-        logger "info" "$container_name is up and running."
+    if docker inspect --format '{{.State.Running}}' "$container" &> /dev/null; then
+        logger "info" "$container is up and running."
     else
-        logger "error" "$container_name is not running."
+        logger "error" "$container is not running."
         breaker=true
     fi
   done
