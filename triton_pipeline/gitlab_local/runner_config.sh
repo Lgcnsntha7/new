@@ -86,7 +86,7 @@ check_container() {
 
   for image in "${images_list[@]}"; do
         local tmp=$(get_CONT $image)
-        containers_list+=$($tmp)
+        containers_list+=($tmp)
   done
 
   for container in "${containers_list[@]}"; do

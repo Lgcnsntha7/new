@@ -1,4 +1,5 @@
 stages:
+  - cleanup
   - login
   - build
   - test
@@ -8,6 +9,15 @@ stages:
 
 variables:
   CONTAINER_FINAL_IMAGE: $CI_REGISTRY_IMAGE:test
+
+.cleanup_job:
+  stage: cleanup
+  tags:
+    - build
+    - docker
+  script:
+    # Delete unnecessary images
+    - docker image prune -f
 
 .login_job:
   stage: login
