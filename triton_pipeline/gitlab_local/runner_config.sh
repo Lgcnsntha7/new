@@ -85,6 +85,10 @@ check_container() {
   logger "Check container..."
   local breaker=false
 
+  if [ -z "$compose" ]; then
+    logger "error" "No compose file provied for the script"
+  fi
+
   for image in "${images_list[@]}"; do
         echo "check image $image"
         local tmp=$(get_CONT $image)
