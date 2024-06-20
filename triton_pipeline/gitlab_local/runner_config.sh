@@ -191,5 +191,7 @@ main() {
     register_RUNNER "$gitlab_runner_container" "$token"
 }
 
+main
+
 
 
