@@ -87,6 +87,7 @@ check_container() {
 
   if [ -z "$compose" ]; then
     logger "error" "No compose file provied for the script"
+    kill_script
   fi
 
   for image in "${images_list[@]}"; do
