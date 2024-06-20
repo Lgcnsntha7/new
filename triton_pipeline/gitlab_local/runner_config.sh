@@ -143,7 +143,7 @@ set_runner_TOKEN() {
 
     local gitlab_url=$(yq '.. | select(has("image")) | select(.image == "*gitlab-ce*") | .environment.GITLAB_OMNIBUS_CONFIG' $compose | grep external_url | awk -F"'" '{print $2}')
 
-    result=$(curl --request POST --header "PRIVATE-TOKEN: 25502e3103cdc4e1cf92616def0c9d" --data "runner_type=instance_type" \
+    result=$(curl --request POST --header "PRIVATE-TOKEN: $token" --data "runner_type=instance_type" \
      "$gitlab_url/api/v4/user/runners")
 
     echo $result | jq -r '.token'
@@ -163,7 +163,7 @@ set_PAT() {
 
 register_RUNNER() {
    local container="$1"
-   local token="$1"
+   local token="$2"
 
    docker exec $container gitlab-runner register --non-interactive \
   --url "http://gitlab:10001" \
@@ -197,6 +197,7 @@ main() {
     fi
 
     logger "info" "step 3: register Token"
+    logger "trying to verify token $token"
     register_RUNNER "$gitlab_runner_container" "$token"
 }
 
