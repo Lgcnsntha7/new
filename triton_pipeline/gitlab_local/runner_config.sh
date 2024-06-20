@@ -86,6 +86,7 @@ check_container() {
   local breaker=false
 
   for image in "${images_list[@]}"; do
+        echo "check image $image"
         local tmp=$(get_CONT $image)
         containers_list+=($tmp)
   done
@@ -129,6 +130,10 @@ check_container() {
 get_CONT() {
     local container_name="$1"
     yq ".. | select(has(\"image\")) | select(.image == \"*$container_name*\") | .container_name" $compose
+
+    echo "full cmd yq \".. | select(has(\"image\")) | select(.image == \"*$container_name*\") | .container_name\" $compose"
+
+
 }
 
 set_runner_TOKEN() {
