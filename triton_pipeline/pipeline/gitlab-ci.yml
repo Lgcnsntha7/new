@@ -1,0 +1,46 @@
+stages:
+  - login
+  - build
+  - test
+  - push
+  - logout
+  
+
+variables:
+  CONTAINER_FINAL_IMAGE: $CI_REGISTRY_IMAGE:test
+
+.login_job:
+  stage: login
+  tags:
+    - docker
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    
+
+.build_job:
+  stage: build
+  tags:
+    - docker
+  script:
+    - docker build -t $CONTAINER_FINAL_IMAGE .
+
+.test_job:
+  stage: test
+  tags:
+    - docker
+  script:
+    - CONTAINER_FINAL_IMAGE=$CONTAINER_FINAL_IMAGE docker-compose up --exit-code-from triton-server triton-server
+    
+.push_job:
+  stage: push
+  tags:
+    - docker
+  script:
+    - docker push $CONTAINER_FINAL_IMAGE
+
+.logout_job:
+  stage: logout
+  tags:
+    - docker
+  script:
+    - docker logout $CI_REGISTRY
