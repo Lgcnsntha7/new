@@ -82,12 +82,15 @@ check_config() {
 
 check_container() {
   # Check if the container is running
+  logger "Check container..."
   local breaker=false
 
   for image in "${images_list[@]}"; do
         local tmp=$(get_CONT $image)
         containers_list+=($tmp)
   done
+
+  echo "${containers_list[@]}"
 
   for container in "${containers_list[@]}"; do
     if docker inspect --format '{{.State.Running}}' "$container_name" &> /dev/null; then
