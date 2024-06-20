@@ -10,3 +10,4 @@ PATH = "model_state_dict.pt"
 
 # Save the state_dict
 torch.save(model.state_dict(), PATH)
+model.save_pretrained("/git")
