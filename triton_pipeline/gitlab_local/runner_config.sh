@@ -136,8 +136,6 @@ get_CONT() {
     yq ".. | select(has(\"image\")) | select(.image == \"*$container_name*\") | .container_name" $compose
 }
 
-yq ".. | select(has(\"image\")) | select(.image == \"*gitlab-ce*\") | .container_name" docker-compose.yaml
-
 set_runner_TOKEN() {
     #Return token string as json
     local gitlab="$1"
@@ -186,7 +184,7 @@ main() {
     gitlab_runner_container=${containers_list[1]}
 
     logger "info" "step 1: set PAT token for gitlab"
-    random_token=$(get_random_TOKEN)
+    random_token=$(get_random_TOKEN "default")
     set_PAT "$gitlab_ce_container" "$random_token"
 
     logger "info" "step 2: request Token"
