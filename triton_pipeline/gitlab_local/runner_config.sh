@@ -156,6 +156,7 @@ set_PAT() {
     local token="$2"
     
     set +H
+    echo "full cmd: docker exec -it $container gitlab-rails runner \"token = User.find_by_username('root').personal_access_tokens.create(scopes: ['create_runner'], name: 'create_runner_pat', expires_at: 1.days.from_now); token.set_token('$token'); token.save\!\""
     docker exec -it $container gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['create_runner'], name: 'create_runner_pat', expires_at: 1.days.from_now); token.set_token('$token'); token.save!"
     return $?
 }
