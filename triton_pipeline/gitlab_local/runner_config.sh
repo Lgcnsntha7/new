@@ -135,11 +135,9 @@ check_container() {
 get_CONT() {
     local container_name="$1"
     yq ".. | select(has(\"image\")) | select(.image == \"*$container_name*\") | .container_name" $compose
-
-    echo "full cmd yq \".. | select(has(\"image\")) | select(.image == \"*$container_name*\") | .container_name\" $compose"
-
-
 }
+
+yq ".. | select(has(\"image\")) | select(.image == \"*gitlab-ce*\") | .container_name" docker-compose.yaml
 
 set_runner_TOKEN() {
     #Return token string as json
