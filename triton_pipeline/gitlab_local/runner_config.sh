@@ -7,7 +7,7 @@ TOP_PID=$$
 
 declare -gA url_list=(["yq"]="https://github.com/mikefarah/yq/releases/download/v4.44.2/yq_linux_amd64" ["docker-compose"]="https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-linux-x86_64")
 
-declare -gA version_list=(["yq"]="yq -V" ["docker-compnse"]="docker-compose -v" ["docker"]="docker -v" ["jq"]="jq --version")
+declare -gA version_list=(["yq"]="yq -V" ["docker-compose"]="docker-compose -v" ["docker"]="docker -v" ["jq"]="jq --version")
 
 declare -ga requirements=("yq" "docker-compose" "docker" "jq")
 
